@@ -36,3 +36,9 @@ button {
 	width: calc(100% - 4px);
 	max-width: 400px;
 }
+
+ol {
+	max-width: 350px;
+	margin: 0 auto;
+	width: 98vw;
+}

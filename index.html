@@ -19,6 +19,10 @@
 			<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
 		<![endif]-->
 		<h1>Dick Golf</h1>
+		<label for="historyInput">Keep history</label>
+		<input type="checkbox" id='historyInput' onchange="toggleHistory(this)">
+		<br />
+		<br />
 		<button onClick="discWheel.startAnimation();">Spin</button>
 		<div id='messBox'></div>
 		<div id='canvasContainer'>
@@ -26,7 +30,15 @@
 				Canvas not supported, use another browser.
 			</canvas> -->
 		</div>
+		<hr />
+		<ol id='historyBox'>
+
+		</ol>
+		<br>
+		<br>
 		<script>
+
+			var preserveHistory = false;
 
 			var viewportWidth = document.documentElement.clientWidth;
 			var canvas = document.createElement('canvas');
@@ -39,7 +51,6 @@
 			  canvas.height = 400;
 			}
 			var cont = document.getElementById('canvasContainer');
-			console.log(canvas.width);
 			cont.style.width = canvas.width + 'px';
 			cont.style.height = canvas.width - 100 + .5 * canvas.width + 'px';
 			cont.appendChild(canvas);
@@ -68,18 +79,20 @@
 	'animation':
 	{
 		'type': 'spinToStop',
-		'duration': 5,
-		'spins': 6,
+		'duration': 3,
+		'spins': 7,
 		'callbackFinished' : 'alertWhich()'
 	}
 });
 
-function alertWhich()
-    {
+function alertWhich() {
         // Call getIndicatedSegment() function to return pointer to the segment pointed to on wheel.
         let winningSegment = discWheel.getIndicatedSegment();
         // Basic alert of the segment text which is the prize name.
 				message(winningSegment.text + "!");
+				if (preserveHistory) {
+					appendHistory(winningSegment.text);
+				}
 				// Stop animation and set angle back to 0.
 				discWheel.stopAnimation(false);
 				discWheel.rotationAngle = 0;
@@ -92,6 +105,15 @@ function alertWhich()
 			window.setTimeout(function() {
 				mess.style.display = 'none';
 			}, 3000);
+		}
+		function appendHistory(text) {
+			const item = document.createElement('li');
+			item.innerText = text;
+			document.getElementById('historyBox').appendChild(item);
+		}
+
+		function toggleHistory (e) {
+			preserveHistory = e.checked;
 		}
 </script>
 	</body>

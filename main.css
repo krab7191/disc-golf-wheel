@@ -18,9 +18,7 @@ button {
 	/* Ensure that background does not repeat */
 	background-position: center;
 	/* Ensure image is centred */
-	width: 400px;
 	/* Width and height should at least be the same as the canvas */
-	height: 500px;
 	margin: 30px auto 0 auto;
 }
 
@@ -29,12 +27,12 @@ button {
 	text-align: center;
 	margin: 0 auto;
 	margin-top: 30px;
-	font-size: 4rem;
+	font-size: 3.5rem;
 	color: red;
 	font-weight: bold;
 	border: 2px solid red;
 	border-radius: 8px;
 	background-color: whitesmoke;
-	width: 80vw;
-	max-width: 350px;
+	width: calc(100% - 4px);
+	max-width: 400px;
 }

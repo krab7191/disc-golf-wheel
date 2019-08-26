@@ -22,11 +22,27 @@
 		<button onClick="discWheel.startAnimation();">Spin</button>
 		<div id='messBox'></div>
 		<div id='canvasContainer'>
-			<canvas id='canvasWheel' width='400' height='400'>
+			<!-- <canvas id='canvasWheel' width='350' height='350'>
 				Canvas not supported, use another browser.
-			</canvas>
+			</canvas> -->
 		</div>
 		<script>
+
+			var viewportWidth = document.documentElement.clientWidth;
+			var canvas = document.createElement('canvas');
+			canvas.setAttribute('id', 'canvasWheel');
+			if (viewportWidth < 400) {
+				canvas.width = viewportWidth;
+				canvas.height = viewportWidth;
+			} else {
+				canvas.width = 400;
+			  canvas.height = 400;
+			}
+			var cont = document.getElementById('canvasContainer');
+			console.log(canvas.width);
+			cont.style.width = canvas.width + 'px';
+			cont.style.height = canvas.width - 100 + .5 * canvas.width + 'px';
+			cont.appendChild(canvas);
 		var discWheel = new Winwheel({
 	'canvasId': 'canvasWheel',
 	'textFontSize': '18',
